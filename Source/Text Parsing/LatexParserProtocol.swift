@@ -81,7 +81,7 @@ extension LatexParserProtocol {
         let defaultSubScriptOffset = RichTextParser.ParserConstants.defaultSubScriptOffset
         let imageOffset = max((image.size.height - fontSize)/2, 0)
         let subscriptOffset: CGFloat = input.contains(RichTextParser.ParserConstants.latexSubscriptCharacter) ? defaultSubScriptOffset : 0
-        return max(subscriptOffset, imageOffset)
+      return 0
     }
 }
 
