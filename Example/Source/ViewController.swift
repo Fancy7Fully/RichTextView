@@ -119,6 +119,7 @@ class ViewController: UIViewController {
             InputOutputModuleView(text: "Look [interactive-element id=123]This is an interactive element[/interactive-element] Wow"),
             InputOutputModuleView(text: "Look [highlighted-element id=456]This is an highlighted element[/highlighted-element] Wow"),
             InputOutputModuleView(text: "Here is more LaTeX [math]A^{}=P^{}\\left(1+\\frac{r}{n}\\right)^{nt}[/math]"),
+            InputOutputModuleView(text: "Here is more LaTeX [math]\\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}[/math]"),
             InputOutputModuleView(text: "Multiple Latex and Markdwon: *Yes* [math]_2[/math]TEST[math]_3[/math]")
         ]
     }
