@@ -11,6 +11,8 @@ import iosMath
 
 public protocol LatexParserProtocol: AnyObject {
     func extractLatex(from input: String, textColor: UIColor, baselineOffset: CGFloat, fontSize: CGFloat, height: CGFloat?) -> NSAttributedString?
+  
+    func setupMathLabelAndGetImage(from input: String, textColor: UIColor, fontSize: CGFloat) -> UIImage?
 }
 
 extension LatexParserProtocol {
@@ -50,7 +52,7 @@ extension LatexParserProtocol {
         return input.getSubstring(inBetween: "[\(mathTagName)]", and: "[/\(mathTagName)]") ?? input
     }
 
-    private func setupMathLabelAndGetImage(from input: String, textColor: UIColor, fontSize: CGFloat) -> UIImage? {
+    public func setupMathLabelAndGetImage(from input: String, textColor: UIColor, fontSize: CGFloat) -> UIImage? {
         let label = MTMathUILabel()
         label.textColor = textColor
         label.latex = input

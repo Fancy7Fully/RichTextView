@@ -382,6 +382,7 @@ class RichTextParser {
         if splitPositions.isEmpty {
             return (mutableAttributedString.trimmingTrailingNewlinesAndWhitespaces(), nil)
         }
+      
         return self.mergeSpecialDataComponentsAndReturnRichText(
             self.split(mutableAttributedString: mutableAttributedString, onPositions: splitPositions)
         )
@@ -425,6 +426,10 @@ class RichTextParser {
             height: self.calculateContentHeight()
         )
     }
+  
+  func extractLatexImage(from input: String) -> UIImage? {
+    return self.latexParser.setupMathLabelAndGetImage(from: input, textColor: self.textColor, fontSize: self.font.pointSize)
+  }
 
     func extractInteractiveElement(from input: NSAttributedString) -> NSMutableAttributedString {
         let interactiveElementTagName = ParserConstants.interactiveElementTagName

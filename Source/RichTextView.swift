@@ -147,6 +147,8 @@ public class RichTextView: UIView {
                     isEditable: self.isEditable,
                     textViewDelegate: self.textViewDelegate
                 )
+            case .image(image: let image):
+              return UIImageView(image: image)
             }
         }
     }
