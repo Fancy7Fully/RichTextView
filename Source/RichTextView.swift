@@ -113,8 +113,11 @@ public class RichTextView: UIView {
                 } else {
                     make.top.equalTo(subviews[index - 1].snp.bottom)
                 }
-                make.width.equalTo(self)
-                make.centerX.equalTo(self)
+//                make.width.equalTo(self)
+              make.leading.equalTo(self)
+//              make.centerX.equalTo(self)
+              make.width.equalTo(subview.intrinsicContentSize.width)
+              make.height.equalTo(subview.intrinsicContentSize.height)
                 if subview is WKWebView {
                     make.height.equalTo(self.snp.width).multipliedBy(VideoProperties.defaultAspectRatio)
                 }
@@ -148,7 +151,8 @@ public class RichTextView: UIView {
                     textViewDelegate: self.textViewDelegate
                 )
             case .image(image: let image):
-              return UIImageView(image: image)
+                let imageView = UIImageView(image: image)
+                return imageView
             }
         }
     }

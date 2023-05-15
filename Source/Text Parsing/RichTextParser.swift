@@ -91,9 +91,31 @@ class RichTextParser {
             } else if let resultErrors = results.errors {
                 errors?.append(contentsOf: resultErrors)
             }
+          if let image = richTextImage(richText: results.output) {
+            return RichDataType.image(image: image)
+          }
             return RichDataType.text(richText: results.output, font: self.font, errors: errors)
         }
     }
+  
+  private func richTextImage(richText: NSAttributedString) -> UIImage? {
+    let initialRange = NSMakeRange(0, richText.length)
+    var imageToReturn: UIImage? = nil
+    richText.enumerateAttributes(in: initialRange, options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (object, range, stop) in
+        if object.keys.contains(NSAttributedString.Key.attachment) {
+          if let attachment = object[NSAttributedString.Key.attachment] as? NSTextAttachment {
+            if range.length + 1 >= initialRange.length {
+              if let image = attachment.image {
+                imageToReturn = image
+              } else if let image = attachment.image(forBounds: attachment.bounds, textContainer: nil, characterIndex: range.location) {
+                imageToReturn = image
+              }
+            }
+          }
+        }
+    }
+    return imageToReturn
+  }
 
     func getRichTextWithErrors(from input: String) -> ParserConstants.RichTextWithErrors {
         let input = self.stripCodeTagsIfNecessary(from: input)
